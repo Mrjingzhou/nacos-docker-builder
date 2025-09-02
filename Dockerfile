@@ -10,8 +10,9 @@ ENV PREFER_HOST_MODE=hostname
 # 安装必要工具
 RUN apt-get update && \
     apt-get install -y wget curl && \
-    apt-get install -y --no-install-recommends vim && \
-    apt-get install -y openjdk-8-jdk-headless && \
+    apt-get install -y --no-install-recommends \
+    vim \   
+    openjdk-8-jdk-headless  && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
