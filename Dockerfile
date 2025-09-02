@@ -7,9 +7,6 @@ ENV NACOS_HOME=/home/nacos
 ENV MODE=standalone
 ENV PREFER_HOST_MODE=hostname
 
-# 安装必要工具
-
-
 # 安装必要工具（无需再安装openjdk-8-jdk-headless）
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
