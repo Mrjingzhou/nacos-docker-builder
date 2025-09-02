@@ -1,0 +1,46 @@
+name: Build Nacos 2.4.1 Image
+
+# 触发条件：推送到main分支或创建PR到main分支
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'Dockerfile'
+      - '.github/workflows/build-nacos.yml'
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 步骤1：拉取代码仓库
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 步骤2：设置Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 步骤3：构建Nacos镜像
+      - name: Build Nacos image
+        run: |
+          docker build -t nacos-server:2.4.1 .
+          docker images | grep nacos-server
+
+      # 步骤4：将镜像导出为tar文件
+      - name: Export image to tar
+        run: |
+          mkdir -p artifacts
+          docker save -o artifacts/nacos-2.4.1.tar nacos-server:2.4.1
+          ls -lh artifacts/
+
+      # 步骤5：上传tar文件作为构建产物
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: nacos-2.4.1-image
+          path: artifacts/nacos-2.4.1.tar
+          retention-days: 7  # 保留7天
+    
