@@ -36,9 +36,9 @@ jobs:
           docker save -o artifacts/nacos-2.4.1.tar nacos-server:2.4.1
           ls -lh artifacts/
 
-      # 步骤5：上传tar文件作为构建产物
+      # 步骤5：上传tar文件作为构建产物（已升级到v4版本）
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # 这里已从v3升级到v4
         with:
           name: nacos-2.4.1-image
           path: artifacts/nacos-2.4.1.tar
