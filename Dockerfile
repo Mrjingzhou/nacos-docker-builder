@@ -1,5 +1,5 @@
 # 使用OpenJDK 8作为基础镜像（Nacos 2.4.1推荐）
-FROM openjdk:8-slim
+FROM openjdk:8-jre-slim
 
 # 配置环境变量
 ENV NACOS_VERSION=2.4.1
@@ -11,6 +11,7 @@ ENV PREFER_HOST_MODE=hostname
 RUN apt-get update && \
     apt-get install -y wget curl && \
     apt-get install -y --no-install-recommends vim && \
+    apt-get install -y openjdk-8-jdk-headless && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
