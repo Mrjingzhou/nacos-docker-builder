@@ -1,5 +1,5 @@
 # 使用OpenJDK 8作为基础镜像（Nacos 2.4.1推荐）
-FROM openjdk:8-jre-slim
+FROM openjdk:8-slim
 
 # 配置环境变量
 ENV NACOS_VERSION=2.4.1
